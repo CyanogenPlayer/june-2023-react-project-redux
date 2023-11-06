@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/june-2023-react-project.iml" filepath="$PROJECT_DIR$/june-2023-react-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/june-2023-react-project.iml" filepath="$PROJECT_DIR$/.idea/june-2023-react-project.iml" />
     </modules>
   </component>
 </project>
