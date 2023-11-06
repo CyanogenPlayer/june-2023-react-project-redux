@@ -12,7 +12,7 @@ const MoviesListCard: FC<IProp> = ({movie}) => {
     const {title, vote_average, poster_path} = movie;
     return (
         <div className={css.MoviesListCard}>
-            <img src={posterBaseURL.concat(poster_path)} alt=""/>
+            <img src={posterBaseURL.concat(poster_path)} alt={title}/>
                 <div className={css.container}>
                     <h4>{title}</h4>
                     <p>{vote_average}</p>
