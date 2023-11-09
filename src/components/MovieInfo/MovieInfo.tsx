@@ -24,8 +24,8 @@ const MovieInfo = () => {
                     <p>Original title: {movie.original_title}</p>
                     <p>Release date: {movie.release_date}</p>
                     <StarsRating rating={movie.vote_average}/>
-                    <div>{movie.genres.map(genre => <p>{genre.name}</p>)}</div> {/*TODO create GenreBadge component and use it here*/}
-                    <p>{movie.overview}</p>
+                    <div>Genres: {movie.genres.map(genre => <p>{genre.name}</p>)}</div> {/*TODO create GenreBadge component and use it here*/}
+                    <p>Overview: {movie.overview}</p>
                     {/*TODO add Actors*/}
                 </div>
             }
