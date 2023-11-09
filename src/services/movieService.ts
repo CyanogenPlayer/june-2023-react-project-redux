@@ -4,8 +4,9 @@ import {IRes} from "../types";
 import {IMovie, IPagination} from "../interfaces";
 
 const movieService = {
-    getAll: (page: number): IRes<IPagination<IMovie[]>> => axiosService.get(urls.movies,
-        {params: {page}})
+    getAll: (page: number): IRes<IPagination<IMovie[]>> => axiosService.get(urls.movies.allMovies,
+        {params: {page}}),
+    getById: (movieId: number) :IRes<IMovie> => axiosService.get(urls.movies.byId(movieId))
 }
 
 export {

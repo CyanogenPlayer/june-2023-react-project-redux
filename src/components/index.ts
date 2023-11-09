@@ -1,2 +1,5 @@
 export * from './Header/Header'
-export * from './MoviesContainer'
+export * from './PosterPreview/PosterPreview'
+export * from './StarsRating/StarsRating'
+export * from './MoviesListContainer'
+export * from './MovieInfo/MovieInfo'

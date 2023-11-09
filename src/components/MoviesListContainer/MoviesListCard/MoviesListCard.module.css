@@ -14,13 +14,13 @@
     box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.6);
 }
 
-.MoviesListCard > img {
+.PosterPreview {
     width: 100%;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
 }
 
-.container {
+.Container {
     padding: 0 16px 32px 16px;
 }
 
