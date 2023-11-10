@@ -10,16 +10,20 @@ import {GenresList} from "../../GenresContainer";
 
 const MoviesList = () => {
     const [movies, setMovies] = useState<IMovie[]>([]);
-    const [query, setQuery] = useSearchParams({page: '1', genre: ''});
+    const [query, setQuery] = useSearchParams({page: '1', genre: 'all'});
+    const [paginateKey, setPaginateKey] = useState(0);
 
     const page = query.get('page');
     const genre = query.get('genre');
 
     useEffect(() => {
-        if (genre != '') {
+        if (genre !== 'all') {
             movieService.getByGenreId(+genre, +page).then(({data: {results}}) => setMovies(results));
+            setPaginateKey(prevKey => prevKey + 1);
         }
-        movieService.getAll(+page).then(({data: {results}}) => setMovies(results));
+        else {
+            movieService.getAll(+page).then(({data: {results}}) => setMovies(results));
+        }
     }, [page, genre]);
 
     const paginationButtonClick = (event: { selected: number }): void => {
@@ -29,13 +33,22 @@ const MoviesList = () => {
         })
     }
 
+    const genreButtonClick = (genreId: number) => {
+        setQuery((prev) => {
+            prev.set('genre', `${genreId}`);
+            prev.set('page', '1');
+            return prev;
+        });
+    }
+
     return (
         <div className={css.Container}>
-            <GenresList/>
+            <GenresList genreButtonClick={genreButtonClick}/>
             <div className={css.MoviesList}>
                 {movies.map(movie => <MoviesListCard key={movie.id} movie={movie}/>)}
             </div>
             <ReactPaginate
+                key = {paginateKey}
                 pageCount={500}
                 pageRangeDisplayed={3}
                 marginPagesDisplayed={1}

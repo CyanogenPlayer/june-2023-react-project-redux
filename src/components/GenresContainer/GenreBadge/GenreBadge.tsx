@@ -5,16 +5,25 @@ import {IGenre} from "../../../interfaces";
 
 interface IProp {
     genre: IGenre
+    genreButtonClick?: (genreId: number) => void;
 }
 
-const GenreBadge: FC<IProp> = ({genre}) => {
+const GenreBadge: FC<IProp> = ({genre, genreButtonClick}) => {
     const {id, name} = genre;
 
     const navigate = useNavigate();
 
+    const navigateToMoviesPage = () => {
+        if (genreButtonClick) {
+            genreButtonClick(id)
+        } else {
+            navigate(`/movies?genre=${id}`)
+        }
+    }
+
     return (
         <div>
-            <button onClick={() => navigate(`/movies?genre=${id}`)}>{name}</button>
+            <button onClick={navigateToMoviesPage}>{name}</button>
         </div>
     );
 };

@@ -5,9 +5,15 @@ import css from './Header.module.css'
 const Header = () => {
     const navigate = useNavigate();
 
+    const navigateHome = () => {
+        navigate('/');
+    }
+
     return (
         <div className={css.Header}>
-            <div onClick={() => navigate('')}>movies</div>
+            <button onClick={navigateHome}>MoviesDB</button>
+            {/*TODO add genre name*/}
+            {/*TODO add user component*/}
         </div>
     );
 };

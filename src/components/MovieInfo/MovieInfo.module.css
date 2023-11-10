@@ -5,3 +5,10 @@
     flex-direction: column;
     align-items: center;
 }
+
+.Genres {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}

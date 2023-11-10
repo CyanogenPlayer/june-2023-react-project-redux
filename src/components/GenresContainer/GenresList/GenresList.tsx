@@ -1,9 +1,15 @@
-import {useEffect, useState} from "react";
-import {IGenre} from "../../../interfaces";
+import {FC, useEffect, useState} from "react";
+
 import {genreService} from "../../../services";
 import {GenreBadge} from "../GenreBadge/GenreBadge";
+import {IGenre} from "../../../interfaces";
+import css from "./GenresList.module.css"
 
-const GenresList = () => {
+interface IProp {
+    genreButtonClick?: (genreId: number) => void;
+}
+
+const GenresList: FC<IProp> = ({genreButtonClick}) => {
     const [genres, setGenres] = useState<IGenre[]>([]);
 
     useEffect(() => {
@@ -11,8 +17,8 @@ const GenresList = () => {
     }, []);
 
     return (
-        <div>
-            {genres.map(genre => <GenreBadge key={genre.id} genre={genre}/>)}
+        <div className={css.GenresList}>
+            {genres.map(genre => <GenreBadge key={genre.id} genre={genre} genreButtonClick={genreButtonClick}/>)}
         </div>
     );
 };

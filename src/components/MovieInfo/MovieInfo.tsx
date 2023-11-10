@@ -1,14 +1,17 @@
-import {useParams} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 
 import {movieService} from "../../services";
 import {IMovie} from "../../interfaces";
 import {PosterPreview} from "../PosterPreview/PosterPreview";
 import css from './MovieInfo.module.css'
 import {StarsRating} from "../StarsRating/StarsRating";
+import {GenreBadge} from "../GenresContainer";
 
-const MovieInfo = () => {
-    const {movieId} = useParams();
+interface IProp {
+    movieId: string
+}
+
+const MovieInfo: FC<IProp> = ({movieId}) => {
     const [movie, setMovie] = useState<IMovie>(null);
 
     useEffect(() => {
@@ -18,13 +21,13 @@ const MovieInfo = () => {
     return (
         <>
             {movie &&
-                <div className={css.MovieInfo}>
+                <div className={css.MovieInfo} key={movie.id}>
                     <PosterPreview poster_path={movie.poster_path} title={movie.title}/>
                     <h4>{movie.title}</h4>
                     <p>Original title: {movie.original_title}</p>
                     <p>Release date: {movie.release_date}</p>
                     <StarsRating rating={movie.vote_average}/>
-                    <div>Genres: {movie.genres.map(genre => <p>{genre.name}</p>)}</div> {/*TODO create GenreBadge component and use it here*/}
+                    <div className={css.Genres}>Genres:{movie.genres.map(genre => <GenreBadge key={genre.id} genre={genre}/>)}</div>
                     <p>Overview: {movie.overview}</p>
                     {/*TODO add Actors*/}
                 </div>
