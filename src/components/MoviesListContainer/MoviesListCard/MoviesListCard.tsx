@@ -11,11 +11,16 @@ interface IProp {
 }
 
 const MoviesListCard: FC<IProp> = ({movie}) => {
+    const {id, title, vote_average, poster_path} = movie;
+
     const navigate = useNavigate();
 
-    const {title, vote_average, poster_path} = movie;
+    const navigateToMovieInfo = () => {
+        navigate(`${id}`)
+    }
+
     return (
-        <div className={css.MoviesListCard} onClick={() => navigate(`${movie.id}`)}>
+        <div className={css.MoviesListCard} onClick={navigateToMovieInfo}>
             <PosterPreview poster_path={poster_path} title={title} className={css.PosterPreview}/>
             <div className={css.Container}>
                 <h4>{title}</h4>
