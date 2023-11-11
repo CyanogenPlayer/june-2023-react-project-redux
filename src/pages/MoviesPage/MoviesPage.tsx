@@ -1,5 +1,5 @@
 import {useSearchParams} from "react-router-dom";
-import {useCallback, useState} from "react";
+import {useState} from "react";
 
 import {GenresList, MoviesList, Paginate, SearchForm} from "../../components";
 import css from './MoviePage.module.css'
@@ -31,17 +31,17 @@ const MoviesPage = () => {
         });
     }
 
-    const totalPagesSet = useCallback((totalPageCount: number) => {
+    const totalPagesSet = (totalPageCount: number) => {
         if (totalPageCount > 500) {
             setTotalPages(500);
         } else {
             setTotalPages(totalPageCount);
         }
-    }, []);
+    }
 
-    const changePaginateKey = useCallback(() => {
+    const changePaginateKey = () => {
         setPaginateKey(prevKey => prevKey + 1);
-    }, []);
+    }
 
     const paginationButtonClick = (event: { selected: number }): void => {
         setQuery(prev => {
