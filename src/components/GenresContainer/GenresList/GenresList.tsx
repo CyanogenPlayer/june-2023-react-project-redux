@@ -6,7 +6,7 @@ import {IGenre} from "../../../interfaces";
 import css from "./GenresList.module.css"
 
 interface IProp {
-    genreButtonClick?: (genreId: number) => void;
+    genreButtonClick: (genreId: number) => void;
 }
 
 const GenresList: FC<IProp> = ({genreButtonClick}) => {

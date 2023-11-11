@@ -7,11 +7,10 @@ const Context = createContext(null);
 
 const ContextProvider: FC<IProps> = ({children}) => {
     const state = useState(false);
-    const [search, setSearch] = useState(null)
 
     return (
         <div>
-            <Context.Provider value={{state, search, setSearch}}>
+            <Context.Provider value={{state}}>
                 {children}
             </Context.Provider>
         </div>
