@@ -7,28 +7,60 @@ import {movieService} from "../../../services";
 import {MoviesListCard} from "../MoviesListCard/MoviesListCard";
 import css from './MoviesList.module.css'
 import {GenresList} from "../../GenresContainer";
+import {SearchForm} from "../../SearchForm/SearchForm";
 
 const MoviesList = () => {
     const [movies, setMovies] = useState<IMovie[]>([]);
-    const [query, setQuery] = useSearchParams({page: '1', genre: 'all'});
+    const [query, setQuery] = useSearchParams({
+        page: '1',
+        genre: '',
+        search: ''
+    });
     const [paginateKey, setPaginateKey] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
 
     const page = query.get('page');
     const genre = query.get('genre');
+    const search = query.get('search');
+
+    const totalPagesSet = (totalPageCount: number) => {
+        if (totalPageCount > 500) {
+            setTotalPages(500);
+        } else {
+            setTotalPages(totalPageCount);
+        }
+    }
 
     useEffect(() => {
-        if (genre !== 'all') {
-            movieService.getByGenreId(+genre, +page).then(({data: {results}}) => setMovies(results));
+        if (genre && genre !== '') {
+            movieService.getByGenreId(+genre, +page).then(({data: {results, total_pages}}) => {
+                setMovies(results);
+                totalPagesSet(total_pages);
+            });
             setPaginateKey(prevKey => prevKey + 1);
+        } else if (search && search !== '') {
+            movieService.getBySearchPhrase(search, +page).then(({data: {results, total_pages}}) => {
+                setMovies(results);
+                totalPagesSet(total_pages);
+            });
+            setPaginateKey(prevKey => prevKey + 1);
+        } else {
+            movieService.getAll(+page).then(({data: {results, total_pages}}) => {
+                setMovies(results)
+                totalPagesSet(total_pages);
+            });
         }
-        else {
-            movieService.getAll(+page).then(({data: {results}}) => setMovies(results));
-        }
-    }, [page, genre]);
+    }, [page, genre, search]);
 
     const paginationButtonClick = (event: { selected: number }): void => {
         setQuery(prev => {
             prev.set('page', `${event.selected + 1}`);
+            if (genre === '') {
+                prev.delete('genre');
+            }
+            if (search === '') {
+                prev.delete('search');
+            }
             return prev;
         })
     }
@@ -37,19 +69,30 @@ const MoviesList = () => {
         setQuery((prev) => {
             prev.set('genre', `${genreId}`);
             prev.set('page', '1');
+            prev.delete('search')
+            return prev;
+        });
+    }
+
+    const searchMovies = (value: string) => {
+        setQuery((prev) => {
+            prev.set('search', `${value}`);
+            prev.set('page', '1');
+            prev.delete('genre')
             return prev;
         });
     }
 
     return (
         <div className={css.Container}>
+            <SearchForm searchMovies={searchMovies}/>
             <GenresList genreButtonClick={genreButtonClick}/>
             <div className={css.MoviesList}>
                 {movies.map(movie => <MoviesListCard key={movie.id} movie={movie}/>)}
             </div>
             <ReactPaginate
                 key = {paginateKey}
-                pageCount={500}
+                pageCount={totalPages}
                 pageRangeDisplayed={3}
                 marginPagesDisplayed={1}
                 previousLabel="<"
