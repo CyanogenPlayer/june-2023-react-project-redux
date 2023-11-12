@@ -19,7 +19,7 @@ const ActorCard: FC<IProps> = ({actor}) => {
             <PosterPreview poster_path={profile_path} title={name} className={css.PosterPreview}/>
             <div className={css.Container}>
                 <h4>{name}</h4>
-                <p>{character}</p>
+                {character && <p>{character}</p>}
             </div>
         </div>
     );

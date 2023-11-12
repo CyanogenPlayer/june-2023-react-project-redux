@@ -9,7 +9,15 @@ interface IProp {
 
 const PosterPreview: FC<IProp> = ({poster_path, title, className}) => {
     return (
-        <img className={className} src={posterBaseURL.concat(poster_path)} alt={title}/>
+        <>
+            {
+                poster_path ? (
+                    <img className={className} src={posterBaseURL.concat(poster_path)} alt={title}/>
+                ) : (
+                    <img className={className} src='https://placehold.co/500x750?text=Image+Not+%20Found' alt={title}/>
+                )
+            }
+        </>
     );
 };
 
