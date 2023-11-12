@@ -1,4 +1,6 @@
 import {IGenre} from "./genreInterface";
+import {IActor} from "./actorInterface";
+import {IMemberOfCrew} from "./memberOfCrewInterface";
 
 export interface IMovie {
     adult: boolean,
@@ -15,5 +17,9 @@ export interface IMovie {
     title: string,
     video: boolean,
     vote_average: number,
-    vote_count: number
+    vote_count: number,
+    credits: {
+        cast: IActor[],
+        crew: IMemberOfCrew[]
+    }
 }

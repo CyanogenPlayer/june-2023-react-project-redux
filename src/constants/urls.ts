@@ -8,7 +8,7 @@ const search = '/search'
 const urls = {
     movies: {
         allMovies: `${discover}${movie}`,
-        byId: (movieId: number): string => `${movie}/${movieId}`
+        byId: (movieId: number): string => `${movie}/${movieId}?append_to_response=credits`
     },
     genres: {
         allGenres: `${genre}${movie}/list`,

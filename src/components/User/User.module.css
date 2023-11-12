@@ -1,0 +1,15 @@
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.userName {
+    color: snow;
+    font-size: 14px;
+}
+
+.userPhoto {
+    margin-right: 10px;
+    height: 40px;
+    border-radius: 50%;
+}

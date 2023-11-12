@@ -21,9 +21,9 @@ const SearchForm: FC<IProps> = ({searchMovies}) => {
     };
 
     return (
-        <form className="d-flex" role="search" onSubmit={searchMoviesEvent}>
+        <form className="d-flex mt-3" role="search" onSubmit={searchMoviesEvent}>
             <input className={`form-control me-2 ${css.search}`} type="search" placeholder="Search" name="search"/>
-            <button className="btn btn-outline-success" type="submit">Search</button>
+            <button className="btn btn-outline-secondary" type="submit">Search</button>
         </form>
     );
 };
