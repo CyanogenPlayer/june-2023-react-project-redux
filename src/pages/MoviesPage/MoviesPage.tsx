@@ -2,7 +2,7 @@ import {useSearchParams} from "react-router-dom";
 import {useState} from "react";
 
 import {GenresList, MoviesList, Paginate, SearchForm} from "../../components";
-import css from './MoviePage.module.css'
+import css from './MoviesPage.module.css'
 
 const MoviesPage = () => {
     const [query, setQuery] = useSearchParams({page: '1'});

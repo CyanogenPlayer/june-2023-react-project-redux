@@ -1,2 +1,2 @@
-export * from './movieService'
 export * from './genreService'
+export * from './movieService'

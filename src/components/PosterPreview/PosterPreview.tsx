@@ -1,5 +1,6 @@
-import {posterBaseURL} from "../../constants";
 import {FC} from "react";
+
+import {posterBaseURL} from "../../constants";
 
 interface IProp {
     poster_path: string,
@@ -14,7 +15,7 @@ const PosterPreview: FC<IProp> = ({poster_path, title, className}) => {
                 poster_path ? (
                     <img className={className} src={posterBaseURL.concat(poster_path)} alt={title}/>
                 ) : (
-                    <img className={className} src='https://placehold.co/500x750?text=Image+Not+%20Found' alt={title}/>
+                    <img className={className} src='https://placehold.co/500x750?text=Image+Not+Found' alt={title}/>
                 )
             }
         </>

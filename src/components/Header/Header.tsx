@@ -1,7 +1,7 @@
 import {useNavigate, useSearchParams} from "react-router-dom";
+import {FC, useEffect, useState} from "react";
 
 import css from './Header.module.css'
-import {FC, useEffect, useState} from "react";
 import {User} from "../User/User";
 import {ThemeSwitch} from "../ThemeSwitch/ThemeSwitch";
 
