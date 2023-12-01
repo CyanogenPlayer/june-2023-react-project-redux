@@ -1,7 +1,7 @@
 import {FC} from "react";
 
 import {IActor} from "../../../interfaces";
-import {ActorCard} from "../ActorCard/ActorCard";
+import {ActorCard} from "../ActorCard";
 import css from './ActorsList.module.css'
 
 interface IProps {

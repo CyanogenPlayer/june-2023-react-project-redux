@@ -2,9 +2,9 @@ import React, {FC, useEffect, useState} from "react";
 
 import {movieService} from "../../services";
 import {IMovie} from "../../interfaces";
-import {PosterPreview} from "../PosterPreview/PosterPreview";
+import {PosterPreview} from "../PosterPreview";
 import css from './MovieInfo.module.css'
-import {StarsRating} from "../StarsRating/StarsRating";
+import {StarsRating} from "../StarsRating";
 import {GenreBadge} from "../GenresContainer";
 import {ActorsList} from "../ActorsContainer";
 import {useTheme} from "../../hooks";

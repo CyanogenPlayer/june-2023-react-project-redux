@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from "react";
 
 import {genreService} from "../../../services";
-import {GenreBadge} from "../GenreBadge/GenreBadge";
+import {GenreBadge} from "../GenreBadge";
 import {IGenre} from "../../../interfaces";
 import css from "./GenresList.module.css"
 

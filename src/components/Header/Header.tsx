@@ -2,8 +2,8 @@ import {useNavigate, useSearchParams} from "react-router-dom";
 import {FC, useEffect, useState} from "react";
 
 import css from './Header.module.css'
-import {User} from "../User/User";
-import {ThemeSwitch} from "../ThemeSwitch/ThemeSwitch";
+import {User} from "../User";
+import {ThemeSwitch} from "../ThemeSwitch";
 
 interface IProps {
     darkTheme: boolean,

@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 
 import {IActor} from "../../../interfaces";
-import {PosterPreview} from "../../PosterPreview/PosterPreview";
+import {PosterPreview} from "../../PosterPreview";
 import css from "./ActorCard.module.css";
 import {useTheme} from "../../../hooks";
 

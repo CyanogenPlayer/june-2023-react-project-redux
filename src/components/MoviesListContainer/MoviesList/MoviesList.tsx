@@ -2,7 +2,7 @@ import {FC, useEffect, useState} from "react";
 
 import {IMovie} from "../../../interfaces";
 import {movieService} from "../../../services";
-import {MoviesListCard} from "../MoviesListCard/MoviesListCard";
+import {MoviesListCard} from "../MoviesListCard";
 import css from './MoviesList.module.css'
 
 interface IProps {

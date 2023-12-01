@@ -3,8 +3,8 @@ import {useNavigate} from "react-router-dom";
 
 import {IMovie} from "../../../interfaces";
 import css from './MoviesListCard.module.css'
-import {PosterPreview} from "../../PosterPreview/PosterPreview";
-import {StarsRating} from "../../StarsRating/StarsRating";
+import {PosterPreview} from "../../PosterPreview";
+import {StarsRating} from "../../StarsRating";
 import {useTheme} from "../../../hooks";
 
 interface IProp {
