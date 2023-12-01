@@ -14,7 +14,6 @@ const ActorCard: FC<IProps> = ({actor}) => {
 
     const {darkMode} = useAppSelector(state => state.theme);
 
-    console.log(profile_path)
     return (
         <div className={darkMode ? css.ActorCard__Dark: css.ActorCard__Light}>
             <PosterPreview poster_path={profile_path} title={name} className={css.PosterPreview}/>
