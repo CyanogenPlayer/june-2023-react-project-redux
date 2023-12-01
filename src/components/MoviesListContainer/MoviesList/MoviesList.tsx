@@ -1,41 +1,32 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useEffect} from "react";
 
-import {IMovie} from "../../../interfaces";
-import {movieService} from "../../../services";
 import {MoviesListCard} from "../MoviesListCard";
 import css from './MoviesList.module.css'
+import {useAppDispatch, useAppSelector} from "../../../hooks";
+import {movieActions} from "../../../redux";
 
 interface IProps {
     page: string,
     genre: string,
     search: string,
-    totalPagesSet: (totalPageCount: number) => void
     changePaginateKey: () => void
 }
 
-const MoviesList: FC<IProps> = ({page, genre, search, totalPagesSet, changePaginateKey}) => {
-    const [movies, setMovies] = useState<IMovie[]>([]);
+const MoviesList: FC<IProps> = ({page, genre, search, changePaginateKey}) => {
+    const {movies} = useAppSelector(state => state.movies);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (genre && genre !== '') {
-            movieService.getByGenreId(+genre, +page).then(({data: {results, total_pages}}) => {
-                setMovies(results);
-                totalPagesSet(total_pages);
-            });
+            dispatch(movieActions.getByGenreId({genreId: +genre, page: +page}))
             changePaginateKey();
         } else if (search && search !== '') {
-            movieService.getBySearchPhrase(search, +page).then(({data: {results, total_pages}}) => {
-                setMovies(results);
-                totalPagesSet(total_pages);
-            });
+            dispatch(movieActions.getBySearchPhrase({phrase: search, page: +page}))
             changePaginateKey();
         } else {
-            movieService.getAll(+page).then(({data: {results, total_pages}}) => {
-                setMovies(results);
-                totalPagesSet(total_pages);
-            });
+            dispatch(movieActions.getAll({page: +page}))
         }
-    }, [page, genre, search]);
+    }, [page, genre, search, dispatch]);
 
     return (
         <div className={css.MoviesList}>

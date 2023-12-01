@@ -12,6 +12,7 @@ const urls = {
     },
     genres: {
         allGenres: `${genre}${movie}/list`,
+        byId: (genreId: number): string => `${genre}/${genreId}`,
         moviesByGenreId: (genreId: number): string => `${genre}/${genreId}/movies`
     },
     search: {

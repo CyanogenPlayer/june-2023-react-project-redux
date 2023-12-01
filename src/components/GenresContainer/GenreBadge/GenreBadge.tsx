@@ -2,7 +2,7 @@ import {FC} from "react";
 import {useNavigate} from "react-router-dom";
 
 import {IGenre} from "../../../interfaces";
-import {useTheme} from "../../../hooks";
+import {useAppSelector} from "../../../hooks";
 
 interface IProp {
     genre: IGenre
@@ -13,7 +13,7 @@ const GenreBadge: FC<IProp> = ({genre, genreButtonClick}) => {
     const {id, name} = genre;
 
     const navigate = useNavigate();
-    const {darkTheme} = useTheme();
+    const {darkMode} = useAppSelector(state => state.theme);
 
     const navigateToMoviesPage = () => {
         if (genreButtonClick) {
@@ -25,7 +25,7 @@ const GenreBadge: FC<IProp> = ({genre, genreButtonClick}) => {
 
     return (
         <div>
-            <button onClick={navigateToMoviesPage} className={`btn ${darkTheme ? 'btn-outline-light' : 'btn-outline-dark'}`}>{name}</button>
+            <button onClick={navigateToMoviesPage} className={`btn ${darkMode ? 'btn-outline-light' : 'btn-outline-dark'}`}>{name}</button>
         </div>
     );
 };

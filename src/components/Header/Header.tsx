@@ -1,16 +1,15 @@
 import {useNavigate, useSearchParams} from "react-router-dom";
-import {FC, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 
 import css from './Header.module.css'
 import {User} from "../User";
 import {ThemeSwitch} from "../ThemeSwitch";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {themeActions} from "../../redux";
 
-interface IProps {
-    darkTheme: boolean,
-    changeTheme: () => void;
-}
-
-const Header: FC<IProps> = ({darkTheme, changeTheme}) => {
+const Header = () => {
+    const {darkMode} = useAppSelector(state => state.theme);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [query] = useSearchParams();
     const [info, setInfo] = useState(null)
@@ -33,12 +32,12 @@ const Header: FC<IProps> = ({darkTheme, changeTheme}) => {
     }
 
     return (
-        <div className={`${darkTheme ? css.Header__Dark : css.Header__Light}`}>
+        <div className={`${darkMode ? css.Header__Dark : css.Header__Light}`}>
             <div className={css.Container}>
-                <button onClick={navigateHome} className={`btn ${darkTheme ? 'btn-outline-light' : 'btn-outline-dark'}`}>MoviesDB</button>
+                <button onClick={navigateHome} className={`btn ${darkMode ? 'btn-outline-light' : 'btn-outline-dark'}`}>MoviesDB</button>
                 {info && <p>{info}</p>}
                 <div className={css.RightPart}>
-                    <ThemeSwitch onChange={changeTheme}/>
+                    <ThemeSwitch onChange={() => dispatch(themeActions.changeDarkMode())}/>
                     <User/>
                 </div>
             </div>

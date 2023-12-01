@@ -1,20 +1,21 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useEffect} from "react";
 
-import {genreService} from "../../../services";
 import {GenreBadge} from "../GenreBadge";
-import {IGenre} from "../../../interfaces";
 import css from "./GenresList.module.css"
+import {useAppDispatch, useAppSelector} from "../../../hooks";
+import {genreActions} from "../../../redux";
 
 interface IProp {
     genreButtonClick: (genreId: number) => void;
 }
 
 const GenresList: FC<IProp> = ({genreButtonClick}) => {
-    const [genres, setGenres] = useState<IGenre[]>([]);
+    const {genres} = useAppSelector(state => state.genres);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        genreService.getAll().then(({data: {genres}}) => setGenres(genres))
-    }, []);
+        dispatch(genreActions.getAll())
+    }, [dispatch]);
 
     return (
         <div className={css.GenresList}>

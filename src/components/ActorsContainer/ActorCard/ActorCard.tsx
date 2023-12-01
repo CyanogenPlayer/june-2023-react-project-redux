@@ -3,7 +3,7 @@ import React, {FC} from "react";
 import {IActor} from "../../../interfaces";
 import {PosterPreview} from "../../PosterPreview";
 import css from "./ActorCard.module.css";
-import {useTheme} from "../../../hooks";
+import {useAppSelector} from "../../../hooks";
 
 interface IProps {
     actor: IActor
@@ -12,10 +12,11 @@ interface IProps {
 const ActorCard: FC<IProps> = ({actor}) => {
     const {character, profile_path, name} = actor;
 
-    const {darkTheme} = useTheme();
+    const {darkMode} = useAppSelector(state => state.theme);
 
+    console.log(profile_path)
     return (
-        <div className={darkTheme ? css.ActorCard__Dark: css.ActorCard__Light}>
+        <div className={darkMode ? css.ActorCard__Dark: css.ActorCard__Light}>
             <PosterPreview poster_path={profile_path} title={name} className={css.PosterPreview}/>
             <div className={css.Container}>
                 <h4>{name}</h4>

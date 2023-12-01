@@ -1,1 +1,2 @@
-export * from './IResType'
+export * from './reduxTypes'
+export * from './resType'

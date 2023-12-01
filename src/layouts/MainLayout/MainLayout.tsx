@@ -1,19 +1,15 @@
 import {Outlet} from "react-router-dom";
 
 import {Header} from "../../components";
-import {useTheme} from "../../hooks";
 import css from './MainLayout.module.css'
+import {useAppSelector} from "../../hooks";
 
 const MainLayout = () => {
-    const {darkTheme, setDarkTheme} = useTheme();
-
-    const changeTheme = () => {
-        setDarkTheme(!darkTheme);
-    }
+    const {darkMode} = useAppSelector(state => state.theme);
 
     return (
-        <div className={darkTheme ? css.MainLayout__Dark : css.MainLayout__Light}>
-            <Header darkTheme={darkTheme} changeTheme={changeTheme}/>
+        <div className={darkMode ? css.MainLayout__Dark : css.MainLayout__Light}>
+            <Header/>
             <Outlet/>
         </div>
     );

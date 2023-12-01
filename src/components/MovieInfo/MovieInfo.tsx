@@ -1,30 +1,30 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useEffect} from "react";
 
-import {movieService} from "../../services";
-import {IMovie} from "../../interfaces";
 import {PosterPreview} from "../PosterPreview";
 import css from './MovieInfo.module.css'
 import {StarsRating} from "../StarsRating";
 import {GenreBadge} from "../GenresContainer";
 import {ActorsList} from "../ActorsContainer";
-import {useTheme} from "../../hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {movieActions} from "../../redux";
 
 interface IProp {
     movieId: string
 }
 
 const MovieInfo: FC<IProp> = ({movieId}) => {
-    const [movie, setMovie] = useState<IMovie>(null);
-    const {darkTheme} = useTheme();
+    const {movie} = useAppSelector(state => state.movies);
+    const {darkMode} = useAppSelector(state => state.theme);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        movieService.getById(+movieId).then(({data}) => setMovie(data));
-    }, [movieId]);
+        dispatch(movieActions.getById({movieId: +movieId}))
+    }, [movieId, dispatch]);
 
     return (
         <>
             {movie &&
-                <div className={darkTheme ? css.MovieInfo__Dark : css.MovieInfo__Light} key={movie.id}>
+                <div className={darkMode ? css.MovieInfo__Dark : css.MovieInfo__Light} key={movie.id}>
                     <PosterPreview poster_path={movie.poster_path} title={movie.title}/>
                     <h4>{movie.title}</h4>
                     <p>Original title: {movie.original_title}</p>

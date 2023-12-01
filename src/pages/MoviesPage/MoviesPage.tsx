@@ -3,10 +3,11 @@ import {useState} from "react";
 
 import {GenresList, MoviesList, Paginate, SearchForm} from "../../components";
 import css from './MoviesPage.module.css'
+import {useAppSelector} from "../../hooks";
 
 const MoviesPage = () => {
     const [query, setQuery] = useSearchParams({page: '1'});
-    const [totalPages, setTotalPages] = useState(0);
+    const {totalPages} = useAppSelector(state => state.movies);
     const [paginateKey, setPaginateKey] = useState(0);
 
     const page = query.get('page');
@@ -31,18 +32,6 @@ const MoviesPage = () => {
         });
     }
 
-    const totalPagesSet = (totalPageCount: number) => {
-        if (totalPageCount > 500) {
-            setTotalPages(500);
-        } else {
-            setTotalPages(totalPageCount);
-        }
-    }
-
-    const changePaginateKey = () => {
-        setPaginateKey(prevKey => prevKey + 1);
-    }
-
     const paginationButtonClick = (event: { selected: number }): void => {
         setQuery(prev => {
             prev.set('page', `${event.selected + 1}`);
@@ -54,13 +43,13 @@ const MoviesPage = () => {
         <div className={css.MoviesPage}>
             <SearchForm searchMovies={searchMovies}/>
             <GenresList genreButtonClick={genreButtonClick}/>
-            <MoviesList page={page} genre={genre} search={search} totalPagesSet={totalPagesSet}
-                        changePaginateKey={changePaginateKey}/>
+            <MoviesList page={page} genre={genre} search={search}
+                        changePaginateKey={() => setPaginateKey(prevKey => prevKey + 1)}/>
             <Paginate key={paginateKey} initialPage={+page} pageCount={totalPages}
                       onPageChange={paginationButtonClick}/>
         </div>
     );
-};
+}
 
 export {
     MoviesPage

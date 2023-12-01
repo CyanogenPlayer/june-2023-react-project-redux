@@ -1,19 +1,17 @@
 import ReactSwitch from "react-switch";
-import {FC, useEffect, useState} from "react";
+import {FC} from "react";
+
+import {useAppSelector} from "../../hooks";
 
 interface IProps {
     onChange: () => void
 }
 
 const ThemeSwitch: FC<IProps> = ({onChange}) => {
-    const [checkedState, setState] = useState(true);
-
-    useEffect(() => {
-        setState(prev => !prev);
-    }, [onChange]);
+    const {darkMode} = useAppSelector(state => state.theme);
 
     return (
-        <ReactSwitch checked={checkedState} onChange={onChange}/>
+        <ReactSwitch checked={darkMode} onChange={onChange}/>
     );
 };
 
