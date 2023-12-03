@@ -1,5 +1,5 @@
 import {useSearchParams} from "react-router-dom";
-import {useState} from "react";
+import {useCallback, useState} from "react";
 
 import {GenresList, MoviesList, Paginate, SearchForm} from "../../components";
 import css from './MoviesPage.module.css'
@@ -39,12 +39,16 @@ const MoviesPage = () => {
         })
     }
 
+    const changePaginateKey = useCallback(() => {
+        setPaginateKey(prevKey => prevKey + 1)
+    }, [])
+
     return (
         <div className={css.MoviesPage}>
             <SearchForm searchMovies={searchMovies}/>
             <GenresList genreButtonClick={genreButtonClick}/>
             <MoviesList page={page} genre={genre} search={search}
-                        changePaginateKey={() => setPaginateKey(prevKey => prevKey + 1)}/>
+                        changePaginateKey={changePaginateKey}/>
             <Paginate key={paginateKey} initialPage={+page} pageCount={totalPages}
                       onPageChange={paginationButtonClick}/>
         </div>

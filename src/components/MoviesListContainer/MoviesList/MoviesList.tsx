@@ -26,7 +26,7 @@ const MoviesList: FC<IProps> = ({page, genre, search, changePaginateKey}) => {
         } else {
             dispatch(movieActions.getAll({page: +page}))
         }
-    }, [page, genre, search, dispatch]);
+    }, [page, genre, search, dispatch, changePaginateKey]);
 
     return (
         <div className={css.MoviesList}>
